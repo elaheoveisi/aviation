@@ -1,0 +1,74 @@
+model_feature,model_type,source_field_or_basis,source_table,transformation,included_main,included_strict,timing_window,timing_confidence,source_decision
+acft_age,numeric,acft_year,aircraft,event year minus manufacture year,True,True,Pre-event/static or event-time observation,Medium,Retain—core
+afm_hrs,numeric,afm_hrs,aircraft,none,True,False,Early record enrichment; not guaranteed at initial notification,Medium,Retain—conditional
+afm_hrs_last_insp,numeric,afm_hrs_last_insp,aircraft,none,True,False,Early record enrichment; not guaranteed at initial notification,Medium,Retain—conditional
+altimeter,numeric,altimeter,events,none,True,True,Pre-event/static or event-time observation,High,Retain—core
+apt_dist,numeric,apt_dist,events,none,True,True,Pre-event/static or event-time observation,High,Retain—core
+apt_elev,numeric,apt_elev,events,none,True,True,Pre-event/static or event-time observation,High,Retain—core
+apt_dir_sin,numeric,apt_dir,events,sine encoding of magnetic direction,True,True,Pre-event/static or event-time observation,High,Retain—core
+apt_dir_cos,numeric,apt_dir,events,cosine encoding of magnetic direction,True,True,Pre-event/static or event-time observation,High,Retain—core
+cert_max_gr_wt,numeric,cert_max_gr_wt,aircraft,none,True,True,Pre-event/static or event-time observation,High,Retain—core
+crew_count,numeric,crew_count,Flight_Crew (derived),none,True,False,Early record enrichment; not guaranteed at initial notification,Medium,Retain—conditional
+days_since_last_inspection,numeric,date_last_insp,aircraft,event date minus last-inspection date,True,False,Early record enrichment; not guaranteed at initial notification,Medium,Retain—conditional
+dec_latitude,numeric,dec_latitude,events (derived),none,True,True,Pre-event/static or event-time observation,High,Retain—core
+dec_longitude,numeric,dec_longitude,events (derived),none,True,True,Pre-event/static or event-time observation,High,Retain—core
+dprt_time_sin,numeric,dprt_time,aircraft,sine encoding of HHMM departure time,True,False,Early record enrichment; not guaranteed at initial notification,Medium,Retain—conditional
+dprt_time_cos,numeric,dprt_time,aircraft,cosine encoding of HHMM departure time,True,False,Early record enrichment; not guaranteed at initial notification,Medium,Retain—conditional
+ev_month_sin,numeric,ev_month,events,sine encoding of calendar month,True,True,Pre-event/static or event-time observation,High,Retain—core
+ev_month_cos,numeric,ev_month,events,cosine encoding of calendar month,True,True,Pre-event/static or event-time observation,High,Retain—core
+ev_time_sin,numeric,ev_time,events,sine encoding of HHMM event time,True,True,Pre-event/static or event-time observation,High,Retain—core
+ev_time_cos,numeric,ev_time,events,cosine encoding of HHMM event time,True,True,Pre-event/static or event-time observation,High,Retain—core
+fc_seats,numeric,fc_seats,aircraft,none,True,True,Pre-event/static or event-time observation,High,Retain—core
+female_crew_count,numeric,female_crew_count,Flight_Crew (derived),none,True,False,Early record enrichment; not guaranteed at initial notification,Medium,Retain—conditional
+fuel_on_board,numeric,fuel_on_board,aircraft,none,True,False,Early record enrichment; not guaranteed at initial notification,Medium,Retain—conditional
+gust_kts,numeric,gust_kts,events,none,True,True,Pre-event/static or event-time observation,High,Retain—core
+mean_age,numeric,mean_age,Flight_Crew (derived),none,True,False,Early record enrichment; not guaranteed at initial notification,Medium,Retain—conditional
+num_eng,numeric,num_eng,aircraft,none,True,True,Pre-event/static or event-time observation,High,Retain—core
+rwy_len,numeric,rwy_len,aircraft,none,True,True,Pre-event/static or event-time observation,High,Retain—core
+rwy_width,numeric,rwy_width,aircraft,none,True,True,Pre-event/static or event-time observation,High,Retain—core
+total_seats,numeric,total_seats,aircraft,none,True,True,Pre-event/static or event-time observation,High,Retain—core
+sky_ceil_ht,numeric,sky_ceil_ht,events,none,True,True,Pre-event/static or event-time observation,High,Retain—core
+sky_nonceil_ht,numeric,sky_nonceil_ht,events,none,True,True,Pre-event/static or event-time observation,High,Retain—core
+vis_sm,numeric,vis_sm,events,none,True,True,Pre-event/static or event-time observation,High,Retain—core
+wind_dir_sin,numeric,wind_dir_deg,events,sine encoding of wind direction,True,True,Pre-event/static or event-time observation,High,Retain—core
+wind_dir_cos,numeric,wind_dir_deg,events,cosine encoding of wind direction,True,True,Pre-event/static or event-time observation,High,Retain—core
+wind_vel_kts,numeric,wind_vel_kts,events,none,True,True,Pre-event/static or event-time observation,High,Retain—core
+wx_dew_pt,numeric,wx_dew_pt,events,none,True,True,Pre-event/static or event-time observation,High,Retain—core
+wx_obs_dir_sin,numeric,wx_obs_dir,events,sine encoding of weather-station direction,True,False,Early record enrichment; not guaranteed at initial notification,Medium,Retain—conditional
+wx_obs_dir_cos,numeric,wx_obs_dir,events,cosine encoding of weather-station direction,True,False,Early record enrichment; not guaranteed at initial notification,Medium,Retain—conditional
+wx_obs_dist,numeric,wx_obs_dist,events,none,True,False,Early record enrichment; not guaranteed at initial notification,Medium,Retain—conditional
+wx_obs_elev,numeric,wx_obs_elev,events,none,True,False,Early record enrichment; not guaranteed at initial notification,Low,Retain—conditional
+wx_obs_time_sin,numeric,wx_obs_time,events,sine encoding of HHMM weather-observation time,True,False,Early record enrichment; not guaranteed at initial notification,Medium,Retain—conditional
+wx_obs_time_cos,numeric,wx_obs_time,events,cosine encoding of HHMM weather-observation time,True,False,Early record enrichment; not guaranteed at initial notification,Medium,Retain—conditional
+wx_temp,numeric,wx_temp,events,none,True,True,Pre-event/static or event-time observation,High,Retain—core
+afm_hrs_since,categorical,afm_hrs_since,aircraft,none,True,False,Early record enrichment; not guaranteed at initial notification,Medium,Retain—conditional
+acft_category,categorical,acft_category,aircraft,none,True,True,Pre-event/static or event-time observation,High,Retain—core
+air_medical,categorical,air_medical,aircraft,none,True,True,Pre-event/static or event-time observation,High,Retain—core
+certs_held,categorical,certs_held,aircraft,none,True,True,Pre-event/static or event-time observation,Medium,Retain—core
+dprt_pt_same_ev,categorical,dprt_pt_same_ev,aircraft,none,True,False,Early record enrichment; not guaranteed at initial notification,Medium,Retain—conditional
+elt_install,categorical,elt_install,aircraft,none,True,True,Pre-event/static or event-time observation,High,Retain—core
+elt_type,categorical,elt_type,aircraft,none,True,True,Pre-event/static or event-time observation,High,Retain—core
+ev_country,categorical,ev_country,events,none,True,True,Pre-event/static or event-time observation,High,Retain—core
+ev_dow,categorical,ev_dow,events,none,True,True,Pre-event/static or event-time observation,High,Retain—core
+ev_nr_apt_loc,categorical,ev_nr_apt_loc,events,none,True,True,Pre-event/static or event-time observation,High,Retain—core
+ev_state,categorical,ev_state,events,none,True,True,Pre-event/static or event-time observation,High,Retain—core
+far_part,categorical,far_part,aircraft,none,True,True,Pre-event/static or event-time observation,High,Retain—core
+fixed_retractable,categorical,fixed_retractable,aircraft,none,True,True,Pre-event/static or event-time observation,Medium,Retain—core
+flight_plan_activated,categorical,flight_plan_activated,aircraft,none,True,False,Early record enrichment; not guaranteed at initial notification,Medium,Retain—conditional
+flt_plan_filed,categorical,flt_plan_filed,aircraft,none,True,True,Pre-event/static or event-time observation,High,Retain—core
+gust_ind,categorical,gust_ind,events,none,True,True,Pre-event/static or event-time observation,High,Retain—core
+homebuilt,categorical,homebuilt,aircraft,none,True,True,Pre-event/static or event-time observation,High,Retain—core
+ifr_equipped_cert,categorical,ifr_equipped_cert,aircraft,none,True,True,Pre-event/static or event-time observation,Medium,Retain—core
+light_cond,categorical,light_cond,events,none,True,True,Pre-event/static or event-time observation,High,Retain—core
+med_certf_mode,categorical,med_certf_mode,Flight_Crew (derived),none,True,False,Early record enrichment; not guaranteed at initial notification,Medium,Retain—conditional
+med_crtf_vldty_mode,categorical,med_crtf_vldty_mode,Flight_Crew (derived),none,True,False,Early record enrichment; not guaranteed at initial notification,Medium,Retain—conditional
+second_pilot,categorical,second_pilot,aircraft,none,True,True,Pre-event/static or event-time observation,High,Retain—core
+site_seeing,categorical,site_seeing,aircraft,none,True,True,Pre-event/static or event-time observation,High,Retain—core
+sky_cond_ceil,categorical,sky_cond_ceil,events,none,True,True,Pre-event/static or event-time observation,High,Retain—core
+sky_cond_nonceil,categorical,sky_cond_nonceil,events,none,True,True,Pre-event/static or event-time observation,High,Retain—core
+type_fly,categorical,type_fly,aircraft,none,True,True,Pre-event/static or event-time observation,High,Retain—core
+type_last_insp,categorical,type_last_insp,aircraft,none,True,False,Early record enrichment; not guaranteed at initial notification,Medium,Retain—conditional
+unmanned,categorical,unmanned,aircraft,none,True,True,Pre-event/static or event-time observation,Medium,Retain—core
+wind_dir_ind,categorical,wind_dir_ind,events,none,True,True,Pre-event/static or event-time observation,High,Retain—core
+wind_vel_ind,categorical,wind_vel_ind,events,none,True,True,Pre-event/static or event-time observation,High,Retain—core
+wx_cond_basic,categorical,wx_cond_basic,events,none,True,True,Pre-event/static or event-time observation,High,Retain—core

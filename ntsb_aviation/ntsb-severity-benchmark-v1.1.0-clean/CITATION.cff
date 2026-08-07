@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the associated manuscript and this repository."
+title: "NTSB Severity Benchmark"
+type: software
+authors:
+  - family-names: Oveisi
+    given-names: Elahe
+version: 1.0.0
+date-released: 2026-08-07
+license: MIT

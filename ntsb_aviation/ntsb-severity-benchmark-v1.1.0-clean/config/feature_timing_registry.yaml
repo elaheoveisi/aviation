@@ -1,0 +1,781 @@
+version: 0.3.0
+features:
+  acft_year:
+    current_declared_type: numeric
+    recommended_model_type: derived age
+    source: aircraft
+    dictionary_basis: acft_year
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: Medium
+    preprocessing: Replace raw manufacture year with aircraft age at event.
+    note: Dictionary supplies only the meaning 'Year of Manufacture'; use aircraft
+      age at event rather than raw calendar year.
+  afm_hrs:
+    current_declared_type: numeric
+    recommended_model_type: numeric
+    source: aircraft
+    dictionary_basis: afm_hrs
+    timing_window: Early record enrichment; not guaranteed at initial notification
+    decision: Retain—conditional
+    confidence: Medium
+    preprocessing: Include in an enriched early-record model and a strict-model sensitivity
+      analysis; fit all preprocessing on training data only.
+    note: Interpret jointly with afm_hrs_since because total hours may be measured
+      at last inspection or at the accident.
+  afm_hrs_last_insp:
+    current_declared_type: numeric
+    recommended_model_type: numeric
+    source: aircraft
+    dictionary_basis: afm_hrs_last_insp
+    timing_window: Early record enrichment; not guaranteed at initial notification
+    decision: Retain—conditional
+    confidence: Medium
+    preprocessing: Include in an enriched early-record model and a strict-model sensitivity
+      analysis; fit all preprocessing on training data only.
+    note: ''
+  altimeter:
+    current_declared_type: numeric
+    recommended_model_type: numeric
+    source: events
+    dictionary_basis: altimeter
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: High
+    preprocessing: Median imputation for continuous variables; explicit Missing level
+      for categorical variables; fit on training data only.
+    note: ''
+  apt_dist:
+    current_declared_type: numeric
+    recommended_model_type: numeric
+    source: events
+    dictionary_basis: apt_dist
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: High
+    preprocessing: Median imputation for continuous variables; explicit Missing level
+      for categorical variables; fit on training data only.
+    note: ''
+  apt_elev:
+    current_declared_type: numeric
+    recommended_model_type: numeric
+    source: events
+    dictionary_basis: apt_elev
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: High
+    preprocessing: Median imputation for continuous variables; explicit Missing level
+      for categorical variables; fit on training data only.
+    note: ''
+  cert_max_gr_wt:
+    current_declared_type: numeric
+    recommended_model_type: numeric
+    source: aircraft
+    dictionary_basis: cert_max_gr_wt
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: High
+    preprocessing: Median imputation for continuous variables; explicit Missing level
+      for categorical variables; fit on training data only.
+    note: ''
+  crew_count:
+    current_declared_type: numeric
+    recommended_model_type: numeric
+    source: Flight_Crew (derived)
+    dictionary_basis: crew_no
+    timing_window: Early record enrichment; not guaranteed at initial notification
+    decision: Retain—conditional
+    confidence: Medium
+    preprocessing: Include in an enriched early-record model and a strict-model sensitivity
+      analysis; fit all preprocessing on training data only.
+    note: Derived by counting Flight_Crew rows for the selected primary aircraft.
+  date_last_insp:
+    current_declared_type: numeric
+    recommended_model_type: derived duration
+    source: aircraft
+    dictionary_basis: date_last_insp
+    timing_window: Early record enrichment; not guaranteed at initial notification
+    decision: Retain—conditional
+    confidence: Medium
+    preprocessing: Parse as date and replace with days since last inspection at event
+      date; do not use the absolute date.
+    note: Do not model the absolute date. Derive elapsed days from event date to avoid
+      encoding the calendar period.
+  dec_latitude:
+    current_declared_type: numeric
+    recommended_model_type: numeric
+    source: events (derived)
+    dictionary_basis: latitude
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: High
+    preprocessing: Derive decimal coordinate from source latitude/longitude; document
+      conversion and range checks.
+    note: Derived decimal form of dictionary field latitude.
+  dec_longitude:
+    current_declared_type: numeric
+    recommended_model_type: numeric
+    source: events (derived)
+    dictionary_basis: longitude
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: High
+    preprocessing: Derive decimal coordinate from source latitude/longitude; document
+      conversion and range checks.
+    note: Derived decimal form of dictionary field longitude.
+  dprt_time:
+    current_declared_type: numeric
+    recommended_model_type: cyclic numeric
+    source: aircraft
+    dictionary_basis: dprt_time
+    timing_window: Early record enrichment; not guaranteed at initial notification
+    decision: Retain—conditional
+    confidence: Medium
+    preprocessing: Validate range and encode cyclically with sine/cosine; do not one-hot
+      degrees or treat HHMM as an ordinary continuous number.
+    note: Time of day in HHMM format; validate and encode cyclically.
+  ev_month:
+    current_declared_type: numeric
+    recommended_model_type: cyclic numeric
+    source: events
+    dictionary_basis: ev_month
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: High
+    preprocessing: Validate range and encode cyclically with sine/cosine; do not one-hot
+      degrees or treat HHMM as an ordinary continuous number.
+    note: Calendar month is cyclic; encode with sine and cosine.
+  ev_time:
+    current_declared_type: numeric
+    recommended_model_type: cyclic numeric
+    source: events
+    dictionary_basis: ev_time
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: High
+    preprocessing: Validate range and encode cyclically with sine/cosine; do not one-hot
+      degrees or treat HHMM as an ordinary continuous number.
+    note: Time of day in HHMM format; validate and encode cyclically.
+  fc_seats:
+    current_declared_type: numeric
+    recommended_model_type: numeric
+    source: aircraft
+    dictionary_basis: fc_seats
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: High
+    preprocessing: Median imputation for continuous variables; explicit Missing level
+      for categorical variables; fit on training data only.
+    note: ''
+  female_crew_count:
+    current_declared_type: numeric
+    recommended_model_type: numeric
+    source: Flight_Crew (derived)
+    dictionary_basis: crew_sex
+    timing_window: Early record enrichment; not guaranteed at initial notification
+    decision: Retain—conditional
+    confidence: Medium
+    preprocessing: Include in an enriched early-record model and a strict-model sensitivity
+      analysis; fit all preprocessing on training data only.
+    note: Derived from crew_sex across crew rows. Retain only with a fairness/sensitivity
+      analysis and clear justification.
+  fuel_on_board:
+    current_declared_type: numeric
+    recommended_model_type: numeric
+    source: aircraft
+    dictionary_basis: fuel_on_board
+    timing_window: Early record enrichment; not guaranteed at initial notification
+    decision: Retain—conditional
+    confidence: Medium
+    preprocessing: Parse numeric values from varchar; invalid/non-numeric values become
+      missing; consider a missingness indicator.
+    note: Stored as varchar in eADMS but modeled numerically; document parsing and
+      invalid-value handling.
+  gust_kts:
+    current_declared_type: numeric
+    recommended_model_type: numeric
+    source: events
+    dictionary_basis: gust_kts
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: High
+    preprocessing: Median imputation for continuous variables; explicit Missing level
+      for categorical variables; fit on training data only.
+    note: ''
+  mean_age:
+    current_declared_type: numeric
+    recommended_model_type: numeric
+    source: Flight_Crew (derived)
+    dictionary_basis: crew_age
+    timing_window: Early record enrichment; not guaranteed at initial notification
+    decision: Retain—conditional
+    confidence: Medium
+    preprocessing: Include in an enriched early-record model and a strict-model sensitivity
+      analysis; fit all preprocessing on training data only.
+    note: Derived from crew_age across crew rows; state whether this represents all
+      crew or only the primary pilot.
+  num_eng:
+    current_declared_type: numeric
+    recommended_model_type: numeric
+    source: aircraft
+    dictionary_basis: num_eng
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: High
+    preprocessing: Median imputation for continuous variables; explicit Missing level
+      for categorical variables; fit on training data only.
+    note: ''
+  rwy_len:
+    current_declared_type: numeric
+    recommended_model_type: numeric
+    source: aircraft
+    dictionary_basis: rwy_len
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: High
+    preprocessing: Median imputation for continuous variables; explicit Missing level
+      for categorical variables; fit on training data only.
+    note: ''
+  rwy_width:
+    current_declared_type: numeric
+    recommended_model_type: numeric
+    source: aircraft
+    dictionary_basis: rwy_width
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: High
+    preprocessing: Median imputation for continuous variables; explicit Missing level
+      for categorical variables; fit on training data only.
+    note: ''
+  total_seats:
+    current_declared_type: numeric
+    recommended_model_type: numeric
+    source: aircraft
+    dictionary_basis: total_seats
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: High
+    preprocessing: Median imputation for continuous variables; explicit Missing level
+      for categorical variables; fit on training data only.
+    note: ''
+  sky_ceil_ht:
+    current_declared_type: numeric
+    recommended_model_type: numeric
+    source: events
+    dictionary_basis: sky_ceil_ht
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: High
+    preprocessing: Median imputation for continuous variables; explicit Missing level
+      for categorical variables; fit on training data only.
+    note: ''
+  sky_nonceil_ht:
+    current_declared_type: numeric
+    recommended_model_type: numeric
+    source: events
+    dictionary_basis: sky_nonceil_ht
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: High
+    preprocessing: Median imputation for continuous variables; explicit Missing level
+      for categorical variables; fit on training data only.
+    note: ''
+  vis_sm:
+    current_declared_type: numeric
+    recommended_model_type: numeric
+    source: events
+    dictionary_basis: vis_sm
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: High
+    preprocessing: Median imputation for continuous variables; explicit Missing level
+      for categorical variables; fit on training data only.
+    note: ''
+  wind_dir_deg:
+    current_declared_type: numeric
+    recommended_model_type: cyclic numeric
+    source: events
+    dictionary_basis: wind_dir_deg
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: High
+    preprocessing: Validate range and encode cyclically with sine/cosine; do not one-hot
+      degrees or treat HHMM as an ordinary continuous number.
+    note: Direction in degrees; encode with sine and cosine rather than as a linear
+      variable.
+  wind_vel_kts:
+    current_declared_type: numeric
+    recommended_model_type: numeric
+    source: events
+    dictionary_basis: wind_vel_kts
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: High
+    preprocessing: Median imputation for continuous variables; explicit Missing level
+      for categorical variables; fit on training data only.
+    note: ''
+  wx_dew_pt:
+    current_declared_type: numeric
+    recommended_model_type: numeric
+    source: events
+    dictionary_basis: wx_dew_pt
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: High
+    preprocessing: Median imputation for continuous variables; explicit Missing level
+      for categorical variables; fit on training data only.
+    note: ''
+  wx_obs_dir:
+    current_declared_type: numeric
+    recommended_model_type: cyclic numeric
+    source: events
+    dictionary_basis: wx_obs_dir
+    timing_window: Early record enrichment; not guaranteed at initial notification
+    decision: Retain—conditional
+    confidence: Medium
+    preprocessing: Validate range and encode cyclically with sine/cosine; do not one-hot
+      degrees or treat HHMM as an ordinary continuous number.
+    note: Direction in degrees; encode with sine and cosine rather than as a linear
+      variable.
+  wx_obs_dist:
+    current_declared_type: numeric
+    recommended_model_type: numeric
+    source: events
+    dictionary_basis: wx_obs_dist
+    timing_window: Early record enrichment; not guaranteed at initial notification
+    decision: Retain—conditional
+    confidence: Medium
+    preprocessing: Include in an enriched early-record model and a strict-model sensitivity
+      analysis; fit all preprocessing on training data only.
+    note: ''
+  wx_obs_elev:
+    current_declared_type: numeric
+    recommended_model_type: numeric
+    source: events
+    dictionary_basis: wx_obs_elev
+    timing_window: Early record enrichment; not guaranteed at initial notification
+    decision: Retain—conditional
+    confidence: Low
+    preprocessing: Include in an enriched early-record model and a strict-model sensitivity
+      analysis; fit all preprocessing on training data only.
+    note: 'Dictionary is internally inconsistent: short description refers to weather-observation
+      facility elevation, while the question definition refers to event-site elevation.'
+  wx_obs_time:
+    current_declared_type: numeric
+    recommended_model_type: cyclic numeric
+    source: events
+    dictionary_basis: wx_obs_time
+    timing_window: Early record enrichment; not guaranteed at initial notification
+    decision: Retain—conditional
+    confidence: Medium
+    preprocessing: Validate range and encode cyclically with sine/cosine; do not one-hot
+      degrees or treat HHMM as an ordinary continuous number.
+    note: Weather-observation time in HHMM format; validate and encode cyclically.
+  wx_temp:
+    current_declared_type: numeric
+    recommended_model_type: numeric
+    source: events
+    dictionary_basis: wx_temp
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: High
+    preprocessing: Median imputation for continuous variables; explicit Missing level
+      for categorical variables; fit on training data only.
+    note: ''
+  afm_hrs_since:
+    current_declared_type: categorical
+    recommended_model_type: categorical
+    source: aircraft
+    dictionary_basis: afm_hrs_since
+    timing_window: Early record enrichment; not guaranteed at initial notification
+    decision: Retain—conditional
+    confidence: Medium
+    preprocessing: Include in an enriched early-record model and a strict-model sensitivity
+      analysis; fit all preprocessing on training data only.
+    note: Qualifier indicates whether total airframe hours were measured at last inspection
+      or accident; availability may depend on post-event record review.
+  acft_category:
+    current_declared_type: categorical
+    recommended_model_type: categorical
+    source: aircraft
+    dictionary_basis: acft_category
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: High
+    preprocessing: Median imputation for continuous variables; explicit Missing level
+      for categorical variables; fit on training data only.
+    note: ''
+  air_medical:
+    current_declared_type: categorical
+    recommended_model_type: categorical
+    source: aircraft
+    dictionary_basis: air_medical
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: High
+    preprocessing: Median imputation for continuous variables; explicit Missing level
+      for categorical variables; fit on training data only.
+    note: ''
+  apt_dir:
+    current_declared_type: categorical
+    recommended_model_type: cyclic numeric
+    source: events
+    dictionary_basis: apt_dir
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: High
+    preprocessing: Validate range and encode cyclically with sine/cosine; do not one-hot
+      degrees or treat HHMM as an ordinary continuous number.
+    note: Configured as categorical in the manuscript list, but the dictionary defines
+      degrees magnetic. Treat as numeric circular data.
+  certs_held:
+    current_declared_type: categorical
+    recommended_model_type: categorical
+    source: aircraft
+    dictionary_basis: certs_held
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: Medium
+    preprocessing: Median imputation for continuous variables; explicit Missing level
+      for categorical variables; fit on training data only.
+    note: Short description says owner, while the question definition refers to operator
+      certificate status.
+  dprt_pt_same_ev:
+    current_declared_type: categorical
+    recommended_model_type: categorical
+    source: aircraft
+    dictionary_basis: dprt_pt_same_ev
+    timing_window: Early record enrichment; not guaranteed at initial notification
+    decision: Retain—conditional
+    confidence: Medium
+    preprocessing: Include in an enriched early-record model and a strict-model sensitivity
+      analysis; fit all preprocessing on training data only.
+    note: ''
+  elt_install:
+    current_declared_type: categorical
+    recommended_model_type: categorical
+    source: aircraft
+    dictionary_basis: elt_install
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: High
+    preprocessing: Median imputation for continuous variables; explicit Missing level
+      for categorical variables; fit on training data only.
+    note: ''
+  elt_type:
+    current_declared_type: categorical
+    recommended_model_type: categorical
+    source: aircraft
+    dictionary_basis: elt_type
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: High
+    preprocessing: Median imputation for continuous variables; explicit Missing level
+      for categorical variables; fit on training data only.
+    note: ''
+  ev_country:
+    current_declared_type: categorical
+    recommended_model_type: categorical
+    source: events
+    dictionary_basis: ev_country
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: High
+    preprocessing: Median imputation for continuous variables; explicit Missing level
+      for categorical variables; fit on training data only.
+    note: ''
+  ev_dow:
+    current_declared_type: categorical
+    recommended_model_type: categorical
+    source: events
+    dictionary_basis: ev_dow
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: High
+    preprocessing: Median imputation for continuous variables; explicit Missing level
+      for categorical variables; fit on training data only.
+    note: ''
+  ev_nr_apt_loc:
+    current_declared_type: categorical
+    recommended_model_type: categorical
+    source: events
+    dictionary_basis: ev_nr_apt_loc
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: High
+    preprocessing: Median imputation for continuous variables; explicit Missing level
+      for categorical variables; fit on training data only.
+    note: ''
+  ev_state:
+    current_declared_type: categorical
+    recommended_model_type: categorical
+    source: events
+    dictionary_basis: ev_state
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: High
+    preprocessing: Median imputation for continuous variables; explicit Missing level
+      for categorical variables; fit on training data only.
+    note: ''
+  far_part:
+    current_declared_type: categorical
+    recommended_model_type: categorical
+    source: aircraft
+    dictionary_basis: far_part
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: High
+    preprocessing: Median imputation for continuous variables; explicit Missing level
+      for categorical variables; fit on training data only.
+    note: ''
+  fixed_retractable:
+    current_declared_type: categorical
+    recommended_model_type: categorical
+    source: aircraft
+    dictionary_basis: fixed_retractable
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: Medium
+    preprocessing: Median imputation for continuous variables; explicit Missing level
+      for categorical variables; fit on training data only.
+    note: The dictionary extract lists only the RETR code although the raw data contain
+      two levels; document raw-value harmonization.
+  flight_plan_activated:
+    current_declared_type: categorical
+    recommended_model_type: categorical
+    source: aircraft
+    dictionary_basis: flight_plan_activated
+    timing_window: Early record enrichment; not guaranteed at initial notification
+    decision: Retain—conditional
+    confidence: Medium
+    preprocessing: Include in an enriched early-record model and a strict-model sensitivity
+      analysis; fit all preprocessing on training data only.
+    note: ''
+  flt_plan_filed:
+    current_declared_type: categorical
+    recommended_model_type: categorical
+    source: aircraft
+    dictionary_basis: flt_plan_filed
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: High
+    preprocessing: Median imputation for continuous variables; explicit Missing level
+      for categorical variables; fit on training data only.
+    note: ''
+  gust_ind:
+    current_declared_type: categorical
+    recommended_model_type: categorical
+    source: events
+    dictionary_basis: gust_ind
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: High
+    preprocessing: Median imputation for continuous variables; explicit Missing level
+      for categorical variables; fit on training data only.
+    note: ''
+  has_second_pilot:
+    current_declared_type: categorical
+    recommended_model_type: exclude
+    source: Flight_Crew (derived; overlaps aircraft.second_pilot)
+    dictionary_basis: crew_no; second_pilot
+    timing_window: Derived duplicate of another retained concept
+    decision: Exclude—redundant
+    confidence: High
+    preprocessing: Drop from the final feature matrix if aircraft.second_pilot is
+      retained.
+    note: Duplicates the aircraft-table second_pilot concept. In the supplied data,
+      the two sources disagree in 1,920 of 22,435 comparable events (8.6%). Keep one
+      definition only.
+  homebuilt:
+    current_declared_type: categorical
+    recommended_model_type: categorical
+    source: aircraft
+    dictionary_basis: homebuilt
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: High
+    preprocessing: Median imputation for continuous variables; explicit Missing level
+      for categorical variables; fit on training data only.
+    note: ''
+  ifr_equipped_cert:
+    current_declared_type: categorical
+    recommended_model_type: categorical
+    source: aircraft
+    dictionary_basis: ifr_equipped_cert
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: Medium
+    preprocessing: Median imputation for continuous variables; explicit Missing level
+      for categorical variables; fit on training data only.
+    note: ''
+  latlong_acq:
+    current_declared_type: categorical
+    recommended_model_type: exclude
+    source: events
+    dictionary_basis: latlong_acq
+    timing_window: Reporting/investigation process metadata
+    decision: Exclude—metadata
+    confidence: High
+    preprocessing: Exclude from the primary model; optionally report a sensitivity
+      analysis showing its effect.
+    note: Describes how coordinates were obtained (GPS/official vs estimated), not
+      the accident itself; may encode documentation quality.
+  light_cond:
+    current_declared_type: categorical
+    recommended_model_type: categorical
+    source: events
+    dictionary_basis: light_cond
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: High
+    preprocessing: Median imputation for continuous variables; explicit Missing level
+      for categorical variables; fit on training data only.
+    note: ''
+  med_certf_mode:
+    current_declared_type: categorical
+    recommended_model_type: categorical
+    source: Flight_Crew (derived)
+    dictionary_basis: med_certf
+    timing_window: Early record enrichment; not guaranteed at initial notification
+    decision: Retain—conditional
+    confidence: Medium
+    preprocessing: Include in an enriched early-record model and a strict-model sensitivity
+      analysis; fit all preprocessing on training data only.
+    note: Derived as the modal med_certf across crew rows in the current package.
+      This conflicts with manuscript wording that says the primary pilot record was
+      used.
+  med_crtf_vldty_mode:
+    current_declared_type: categorical
+    recommended_model_type: categorical
+    source: Flight_Crew (derived)
+    dictionary_basis: med_crtf_vldty
+    timing_window: Early record enrichment; not guaranteed at initial notification
+    decision: Retain—conditional
+    confidence: Medium
+    preprocessing: Include in an enriched early-record model and a strict-model sensitivity
+      analysis; fit all preprocessing on training data only.
+    note: Derived as the modal med_crtf_vldty across crew rows in the current package.
+      This conflicts with manuscript wording that says the primary pilot record was
+      used.
+  second_pilot:
+    current_declared_type: categorical
+    recommended_model_type: categorical
+    source: aircraft
+    dictionary_basis: second_pilot
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: High
+    preprocessing: Median imputation for continuous variables; explicit Missing level
+      for categorical variables; fit on training data only.
+    note: ''
+  site_seeing:
+    current_declared_type: categorical
+    recommended_model_type: categorical
+    source: aircraft
+    dictionary_basis: site_seeing
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: High
+    preprocessing: Median imputation for continuous variables; explicit Missing level
+      for categorical variables; fit on training data only.
+    note: ''
+  sky_cond_ceil:
+    current_declared_type: categorical
+    recommended_model_type: categorical
+    source: events
+    dictionary_basis: sky_cond_ceil
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: High
+    preprocessing: Median imputation for continuous variables; explicit Missing level
+      for categorical variables; fit on training data only.
+    note: ''
+  sky_cond_nonceil:
+    current_declared_type: categorical
+    recommended_model_type: categorical
+    source: events
+    dictionary_basis: sky_cond_nonceil
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: High
+    preprocessing: Median imputation for continuous variables; explicit Missing level
+      for categorical variables; fit on training data only.
+    note: ''
+  type_fly:
+    current_declared_type: categorical
+    recommended_model_type: categorical
+    source: aircraft
+    dictionary_basis: type_fly
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: High
+    preprocessing: Median imputation for continuous variables; explicit Missing level
+      for categorical variables; fit on training data only.
+    note: ''
+  type_last_insp:
+    current_declared_type: categorical
+    recommended_model_type: categorical
+    source: aircraft
+    dictionary_basis: type_last_insp
+    timing_window: Early record enrichment; not guaranteed at initial notification
+    decision: Retain—conditional
+    confidence: Medium
+    preprocessing: Include in an enriched early-record model and a strict-model sensitivity
+      analysis; fit all preprocessing on training data only.
+    note: ''
+  unmanned:
+    current_declared_type: categorical
+    recommended_model_type: categorical
+    source: aircraft
+    dictionary_basis: unmanned
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: Medium
+    preprocessing: Median imputation for continuous variables; explicit Missing level
+      for categorical variables; fit on training data only.
+    note: ''
+  wind_dir_ind:
+    current_declared_type: categorical
+    recommended_model_type: categorical
+    source: events
+    dictionary_basis: wind_dir_ind
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: High
+    preprocessing: Median imputation for continuous variables; explicit Missing level
+      for categorical variables; fit on training data only.
+    note: ''
+  wind_vel_ind:
+    current_declared_type: categorical
+    recommended_model_type: categorical
+    source: events
+    dictionary_basis: wind_vel_ind
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: High
+    preprocessing: Median imputation for continuous variables; explicit Missing level
+      for categorical variables; fit on training data only.
+    note: ''
+  wx_cond_basic:
+    current_declared_type: categorical
+    recommended_model_type: categorical
+    source: events
+    dictionary_basis: wx_cond_basic
+    timing_window: Pre-event/static or event-time observation
+    decision: Retain—core
+    confidence: High
+    preprocessing: Median imputation for continuous variables; explicit Missing level
+      for categorical variables; fit on training data only.
+    note: ''
+  wx_src_iic:
+    current_declared_type: categorical
+    recommended_model_type: exclude
+    source: events
+    dictionary_basis: wx_src_iic
+    timing_window: Reporting/investigation process metadata
+    decision: Exclude—metadata
+    confidence: High
+    preprocessing: Exclude from the primary model; optionally report a sensitivity
+      analysis showing its effect.
+    note: Explicitly defined as the investigator's weather-information source; this
+      is reporting/investigation metadata.

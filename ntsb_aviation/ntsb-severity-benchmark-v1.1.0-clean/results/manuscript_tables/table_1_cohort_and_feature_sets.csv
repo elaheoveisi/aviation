@@ -1,0 +1,9 @@
+item,main_value,strict_value
+Cohort events (2008-2025),30087,30087
+Severe events,9382,9382
+Non-severe events,20705,20705
+Numeric predictors,42,27
+Categorical predictors,31,25
+Total modeled predictors,73,52
+Random test events,6018,6018
+Temporal test events (2020-2025),9661,9661

@@ -1,0 +1,13 @@
+feature_set,validation_design,model,metric,estimate,ci_low,ci_high,bootstrap_repetitions
+strict_initial_sensitivity,random,logistic_regression,roc_auc,0.7732370024819055,0.7603185419691839,0.7862570719149669,1000
+strict_initial_sensitivity,random,logistic_regression,fnr,0.5908364411294619,0.5667296950930425,0.6130441303351397,1000
+strict_initial_sensitivity,random,random_forest,roc_auc,0.7916992863572907,0.7789072128489556,0.8046169343958116,1000
+strict_initial_sensitivity,random,random_forest,fnr,0.7485348961108151,0.7283971804766385,0.7676190222991482,1000
+strict_initial_sensitivity,random,xgboost,roc_auc,0.7987127181863295,0.7859075959433235,0.8104379767123977,1000
+strict_initial_sensitivity,random,xgboost,fnr,0.6313265849760256,0.610031687878962,0.6530646984810081,1000
+strict_initial_sensitivity,temporal,logistic_regression,roc_auc,0.7073339640040569,0.6963167506593055,0.7187533571155441,1000
+strict_initial_sensitivity,temporal,logistic_regression,fnr,0.6660707901322845,0.6478612615587342,0.6830558533873402,1000
+strict_initial_sensitivity,temporal,random_forest,roc_auc,0.7194772402249163,0.7091051587642373,0.7298814013978026,1000
+strict_initial_sensitivity,temporal,random_forest,fnr,0.7718984626385413,0.7565869865014334,0.7880829142145382,1000
+strict_initial_sensitivity,temporal,xgboost,roc_auc,0.731162071750202,0.7214297134215011,0.7417337734954519,1000
+strict_initial_sensitivity,temporal,xgboost,fnr,0.6224526278155166,0.603432098686727,0.6403138528138528,1000
